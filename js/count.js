@@ -1,9 +1,13 @@
 let string="numentica ui";
-b=string.split("");
+let word=[];
 let count=0;
-b.filter(e=> {
-    if(e=="a"||e=="e"||e=="i"||e=="o"||e=="u" || e=="A"||e=="E"||e=="I"||e=="O"||e=="U"){
+for(i=0;i<string.length;i++){
+    word[word.length]=string[i];
+};
+    for(i=0;i<word.length;i++){
+    if(word[i]=="a"||word[i]=="e"||word[i]=="i"||word[i]=="o"||word[i]=="u" || word[i]=="A"||word[i]=="E"||word[i]=="I"||word[i]=="O"||word[i]=="U"){
         count++;
     }
-});
+};
 console.log(count);
+
