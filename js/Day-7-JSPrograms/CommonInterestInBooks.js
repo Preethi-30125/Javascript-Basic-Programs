@@ -40,14 +40,12 @@ function commonInterestInBooks(students) {
     for (let bookName in bookToStudentMap) {
         let studentsWithBook = bookToStudentMap[bookName];
         if (studentsWithBook.length > 1) {   // Only if more than 1 students like it
-            for (let i = 0; i < studentsWithBook.length; i++) {
-                // If first time counting for this student, start at 0
-                if (!sharedInterestCounts[studentsWithBook[i]]) {
-                    sharedInterestCounts[studentsWithBook[i]] = 0;
+                //Credit to the first student in the list and add it to the sharedInterestCounts
+                if (!sharedInterestCounts[studentsWithBook[0]]) {
+                    sharedInterestCounts[studentsWithBook[0]] = 0;
                 }
                 // Increase the count (number of shared interests)
-                sharedInterestCounts[studentsWithBook[i]]++;
-            }
+                sharedInterestCounts[studentsWithBook[0]]++;
         }
     }
     // Find the maximum shared interest count
