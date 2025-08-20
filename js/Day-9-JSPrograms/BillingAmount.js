@@ -31,7 +31,7 @@ function getTotalAmount(storeInventory, userList) {
             if (userItem.item.toLowerCase() === storeItem.item.toLowerCase()) {
                 itemfound=true;
                  // Validate store quantity
-                 if (storeItem.quantity <= 0  || !Number.isInteger(storeItem.quantity)) {
+                 if (storeItem.quantity <= 0) {
                     console.error("Invalid quantity " + storeItem.quantity + " for " + storeItem.item);
                     continue;
         }
