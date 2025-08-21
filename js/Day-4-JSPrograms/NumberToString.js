@@ -5,8 +5,8 @@ function convertNumberToString(numberValue) {
         console.error("Invalid input,please give the proper input");
         return false;
     }
-    let wordsResult = "";
 
+    let wordsResult = "";
     const numberAsString = "" + numberValue;
 
     for (let i = 0; i < numberAsString.length; i++) {

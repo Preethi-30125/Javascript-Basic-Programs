@@ -6,6 +6,14 @@ function commonInterestInBooks(students) {
 
     //Create a map to link each book with the students who like it
     const bookToStudentMap = {};
+    let bookName;
+    let alreadyExists;
+    let studentNamesList;
+    const sharedInterestCounts = {};
+    let studentsWithBook;
+    let maxSharedCount;
+    let mostSharedStudents;
+    
     for (let i = 0; i < students.length; i++) {
 
         if (!students[i] || !students[i].name || !Array.isArray(students[i].books)) {
@@ -13,7 +21,18 @@ function commonInterestInBooks(students) {
         }
 
         for (let j = 0; j < students[i].books.length; j++) {
-            let bookName = students[i].books[j];
+            bookName = students[i].books[j].toLowerCase();
+
+            alreadyExists = false;
+            for (let k = 0; k < bookToStudentMap[bookName]?.length; k++) {
+                if (bookToStudentMap[bookName][k] === students[i].name) {
+                    alreadyExists = true;
+                    break;
+                }
+            }
+            if (alreadyExists) {
+                continue;
+            }
 
             // If the book is not yet in the map, create an empty list
             if (!bookToStudentMap[bookName]) {
@@ -25,7 +44,7 @@ function commonInterestInBooks(students) {
     }
 
     for (let bookName in bookToStudentMap) {
-        let studentNamesList = "";
+        studentNamesList = "";
         // Build a string like: "'Arun', 'Ashok'"
         for (let i = 0; i < bookToStudentMap[bookName].length; i++) {
             studentNamesList += "'" + bookToStudentMap[bookName][i] + "'";
@@ -36,21 +55,21 @@ function commonInterestInBooks(students) {
         console.log(bookName + "-[" + studentNamesList + "]");
     }
     //Count shared interests (only books that more than 1 student likes)
-    const sharedInterestCounts = {};
+    
     for (let bookName in bookToStudentMap) {
-        let studentsWithBook = bookToStudentMap[bookName];
+        studentsWithBook = bookToStudentMap[bookName];
         if (studentsWithBook.length > 1) {   // Only if more than 1 students like it
-                //Credit to the first student in the list and add it to the sharedInterestCounts
-                if (!sharedInterestCounts[studentsWithBook[0]]) {
-                    sharedInterestCounts[studentsWithBook[0]] = 0;
-                }
-                // Increase the count (number of shared interests)
-                sharedInterestCounts[studentsWithBook[0]]++;
+            //Credit to the first student in the list and add it to the sharedInterestCounts
+            if (!sharedInterestCounts[studentsWithBook[0]]) {
+                sharedInterestCounts[studentsWithBook[0]] = 0;
+            }
+            // Increase the count (number of shared interests)
+            sharedInterestCounts[studentsWithBook[0]]++;
         }
     }
     // Find the maximum shared interest count
-    let maxSharedCount = 0;
-    let mostSharedStudents = [];
+    maxSharedCount = 0;
+    mostSharedStudents = [];
     for (let studentName in sharedInterestCounts) {
         if (sharedInterestCounts[studentName] > maxSharedCount) {
             maxSharedCount = sharedInterestCounts[studentName];
@@ -75,7 +94,7 @@ commonInterestInBooks([
     {
         id: 1,
         name: 'Ashok',
-        books: ['Chakra', 'War and Peace', 'The Shining']
+        books: ['Chakra', 'War and Peace', 'The Shining', 'wings of Fire']
     },
     {
         id: 2,

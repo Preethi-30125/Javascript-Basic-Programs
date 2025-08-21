@@ -1,33 +1,37 @@
-function repeatingCharacter(inputCharacters){
-    
-     //Checking possible edge cases to ensure valid inputs
-    if(!inputCharacters || typeof inputCharacters != "string"|| inputCharacters===" "){
-         console.error("Invalid input,please give the proper input");
-         return false;
+function repeatingCharacter(inputCharacters) {
+
+    //Checking possible edge cases to ensure valid inputs
+    if (!inputCharacters || typeof inputCharacters != "string" || inputCharacters === " ") {
+        console.error("Invalid input,please give the proper input");
+        return false;
     }
-    let maxCount=0; 
-    let mostRepeatedCharacter=[];   
-    for(let i=0;i<inputCharacters.length;i++){
-        let repeatCount=1;   
-        for(let j=i+1;j<inputCharacters.length;j++){
-            if(inputCharacters[i]===inputCharacters[j]){
+    
+    let maxCount = 0;
+    let mostRepeatedCharacter = [];
+    let repeatCount;
+    let alreadyAdded;
+
+    for (let i = 0; i < inputCharacters.length; i++) {
+         repeatCount = 1;
+        for (let j = i + 1; j < inputCharacters.length; j++) {
+            if (inputCharacters[i] === inputCharacters[j]) {
                 repeatCount++;   // Increment count if the same character repeats
             }
-            else{
+            else {
                 break;  // Stop counting when a different character is found
             }
-           
+
         }
 
         // Save the character if it appears more times in a row than any previous one
-       if(repeatCount>maxCount){
-        maxCount=repeatCount;
-        mostRepeatedCharacter=[inputCharacters[i]];
-       }
+        if (repeatCount > maxCount) {
+            maxCount = repeatCount;
+            mostRepeatedCharacter = [inputCharacters[i]];
+        }
 
-       //check if it's already in the array
+        //check if it's already in the array
         else if (repeatCount === maxCount) {
-            let alreadyAdded = false;
+            alreadyAdded = false;
             for (let k = 0; k < mostRepeatedCharacter.length; k++) {
                 if (mostRepeatedCharacter[k] === inputCharacters[i]) {
                     alreadyAdded = true;
@@ -40,13 +44,13 @@ function repeatingCharacter(inputCharacters){
             }
         }
     }
-        
-    if (maxCount == 1) {
-            console.error("There is no repetition in the string");
-            return true;
-        }
 
-console.log( mostRepeatedCharacter);  
-return mostRepeatedCharacter;
+    if (maxCount == 1) {
+        console.error("There is no repetition in the string");
+        return true;
+    }
+
+    console.log(mostRepeatedCharacter);
+    return mostRepeatedCharacter;
 }
 (repeatingCharacter("traaangfornnwbie"))
