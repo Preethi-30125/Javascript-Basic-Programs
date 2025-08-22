@@ -24,7 +24,7 @@ function commonInterestInBooks(students) {
             bookName = students[i].books[j].toLowerCase();
 
             alreadyExists = false;
-            for (let k = 0; k < bookToStudentMap[bookName]?.length; k++) {
+            for (let k = 0; k < bookToStudentMap[bookName].length; k++) {
                 if (bookToStudentMap[bookName][k] === students[i].name) {
                     alreadyExists = true;
                     break;
