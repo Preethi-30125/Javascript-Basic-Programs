@@ -2,7 +2,7 @@
 function formattingUsPhoneNumber(phoneNumber) {
 
     let usPhoneNumber = "";
-    
+
     if (typeof phoneNumber == "string") {
         for (let currentCharacters of phoneNumber) {
             //If the character is a digit (0–9), add it to usPhoneNumber

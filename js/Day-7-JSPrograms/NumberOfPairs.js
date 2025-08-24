@@ -4,7 +4,7 @@ function numberOfPairs(numberArray, targetSum) {
         console.log("Invalid input,please give the proper input");
         return false;
     }
-    
+
     let countPairs = 0;
     let pairs = [];
     let alreadyExists;

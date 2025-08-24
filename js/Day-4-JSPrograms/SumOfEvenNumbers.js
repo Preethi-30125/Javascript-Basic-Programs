@@ -5,7 +5,7 @@ function sumOfEvenNumbers(numberArray) {
         console.error("Invalid input,please give the proper input");
         return false;
     }
-    
+
     let totalEvenSum = 0;
 
     for (let i = 0; i < numberArray.length; i++) {
@@ -16,7 +16,7 @@ function sumOfEvenNumbers(numberArray) {
 
     }
     if (totalEvenSum === 0) {
-        console.error("The array only contains odd numbers");
+        console.error("The array does not contains any even numbers");
         return true;
     }
     console.log(totalEvenSum);

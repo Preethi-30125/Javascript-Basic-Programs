@@ -13,7 +13,7 @@ function commonInterestInBooks(students) {
     let studentsWithBook;
     let maxSharedCount;
     let mostSharedStudents;
-    
+
     for (let i = 0; i < students.length; i++) {
 
         if (!students[i] || !students[i].name || !Array.isArray(students[i].books)) {
@@ -55,7 +55,7 @@ function commonInterestInBooks(students) {
         console.log(bookName + "-[" + studentNamesList + "]");
     }
     //Count shared interests (only books that more than 1 student likes)
-    
+
     for (let bookName in bookToStudentMap) {
         studentsWithBook = bookToStudentMap[bookName];
         if (studentsWithBook.length > 1) {   // Only if more than 1 students like it

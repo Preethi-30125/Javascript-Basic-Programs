@@ -16,7 +16,7 @@ function calculateTotalHoursElapsed(startingTime, endingTime) {
         if (splitIntoParts.length !== 2) {
             return null;
         }
-        
+
         if (meridian !== "AM" && meridian !== "PM" || time.length !== 2 || isNaN(hours) || isNaN(minutes) || hours < 1 || hours > 12 || minutes < 0 || minutes > 59) {
             return null;
         }
@@ -36,7 +36,7 @@ function calculateTotalHoursElapsed(startingTime, endingTime) {
     // Convert start and end times into minutes
     const startingMinute = toMinutes(startingTime);
     const endingMinute = toMinutes(endingTime);
-     // Calculate the difference in minutes
+    // Calculate the difference in minutes
     const totalMinutesDifference = (endingMinute - startingMinute + 1440) % 1440;
     const elapsedHours = parseInt(totalMinutesDifference / 60);
     const elapsedMinutes = totalMinutesDifference % 60;

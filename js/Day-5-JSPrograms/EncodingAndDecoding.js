@@ -5,7 +5,7 @@ function encodeMessage(inputText, shiftValue) {
     if (!inputText || !shiftValue || typeof inputText !== "string" || !Number.isInteger(shiftValue) || shiftValue < 0) {
         return "Invalid input,please give the proper input";
     }
-    
+
     const alphabets = "abcdefghijklmnopqrstuvwxyz";
     let encodedCharacters = "";
     let shiftedIndex;

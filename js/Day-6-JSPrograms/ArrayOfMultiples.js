@@ -36,4 +36,4 @@ function arrayOfMultiples(inputArray) {
         console.log(productOfBaseNumber);
     }
 }
-arrayOfMultiples([2,5]);
+arrayOfMultiples([2, 5]);

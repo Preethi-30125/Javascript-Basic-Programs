@@ -5,14 +5,14 @@ function repeatingCharacter(inputCharacters) {
         console.error("Invalid input,please give the proper input");
         return false;
     }
-    
+
     let maxCount = 0;
     let mostRepeatedCharacter = [];
     let repeatCount;
     let alreadyAdded;
 
     for (let i = 0; i < inputCharacters.length; i++) {
-         repeatCount = 1;
+        repeatCount = 1;
         for (let j = i + 1; j < inputCharacters.length; j++) {
             if (inputCharacters[i] === inputCharacters[j]) {
                 repeatCount++;   // Increment count if the same character repeats

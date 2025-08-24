@@ -33,7 +33,7 @@ function replaceTemplateString(templateString, replacementArray) {
                 }
                 if (replacementArray[j][0] === placeholderKey) {
                     replacedString += replacementArray[j][1];  // Add the replacement value
-                    
+
                     if (replacementArray[j][1] == 0 || !replacementArray[j][1]) {
                         console.log("Invalid input,the key " + "(" + placeholderKey + ")" + " value pair is not found");
                         return false;
@@ -57,4 +57,4 @@ function replaceTemplateString(templateString, replacementArray) {
     console.log(replacedString);
     return replacedString;
 }
-replaceTemplateString("Numentica is a company focused on delivering high quality code. It is located in #[location] #[state] #[phone]", [["location", "Chennai"], ["state","Tamil Nadu"], ["phone", "9840164723"]]);
+replaceTemplateString("Numentica is a company focused on delivering high quality code. It is located in #[location] #[state] #[phone]", [["location", "Chennai"], ["state", "Tamil Nadu"], ["phone", "9840164723"]]);

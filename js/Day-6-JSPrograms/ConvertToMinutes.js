@@ -12,8 +12,8 @@ function convertToMinutes(time) {
       console.error("Invalid format,must be HH:MM format");
       return false;
     }
-    
-    if (hours < 0 || hours > 24 || minutes < 0 || minutes >= 60) {
+
+    if (isNaN(hours) || isNaN(minutes) || hours < 0 || hours > 24 || minutes < 0 || minutes >= 60) {
       console.error("Invalid input,please give the proper input");
       return false;
     }

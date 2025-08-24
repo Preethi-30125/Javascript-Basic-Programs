@@ -1,13 +1,76 @@
 function trackingSKU(stocks) {
     let stats = { totalSkus: 0, deduped: 0, invalid: 0 };
-    let separatingSku=stocks.map((skus)=>{
-        return skus.variants.map((variant)=>({
-            id:skus.id,
-           sku:variant.sku
-        }));
+    const allVariants = stocks.map(function (product) {
+        return product.variants.map(function (variant) {
+            return {
+                sku: variant.sku,
+                color: variant.color,
+                size: variant.size,
+                price: variant.price,
+                stock: variant.stock,
+                productId: product.id,
+                productName: product.name
+            };
+        });
+    }).reduce(function (combinedVariants, currentVariants) {
+
+        for (let i = 0; i < currentVariants.length; i++) {
+            combinedVariants.push(currentVariants[i]);
+
+        }
+        return combinedVariants;
+    }, []);
+
+    //check if product or variant has missing or invalid data
+    const validVariants = allVariants.filter(function (valid) {
+        const isValid = valid.productId && typeof valid.productId === "string" &&
+            valid.productName && typeof valid.productName === "string" &&
+            valid.sku && typeof valid.sku === "string" &&
+            valid.color && typeof valid.color === "string" &&
+            valid.size && typeof valid.size === "string" &&
+            typeof valid.price === "number" && valid.price > 0 && typeof valid.stock === "number" && valid.stock >= 0;
+
+        if (!isValid) {
+            stats.invalid++;
+        }
+        return isValid;
     });
-    console.log(separatingSku);
-    
+
+    stats.totalSkus = allVariants.length;
+
+    const trackedStocks = validVariants.reduce(function (combinedVariants, valid) {
+        if (!combinedVariants[valid.sku]) {
+            // If SKU is seen for the first time, create a new entry
+            combinedVariants[valid.sku] = {
+                sku: valid.sku,
+                productId: [valid.productId],
+                name: valid.productName,
+                attributes: { color: valid.color, size: valid.size },
+                price: valid.price,
+                stock: valid.stock
+            };
+        } else {
+            // If SKU already exists, check if this productId is already included
+            let alreadyExists = false;
+            for (let i = 0; i < combinedVariants[valid.sku].productId.length; i++) {
+                if (combinedVariants[valid.sku].productId[i] === valid.productId) {
+                    alreadyExists = true;
+                    break;
+                }
+            }
+            if (!alreadyExists) {
+                combinedVariants[valid.sku].productId.push(valid.productId);
+            }
+
+            combinedVariants[valid.sku].stock += valid.stock;
+            stats.deduped++;
+        }
+        return combinedVariants;
+    }, {});
+
+    console.log("bySku:", trackedStocks);
+    console.log("Stats:", stats);
+    return { trackedStocks: trackedStocks, stats: stats };
 }
 
 trackingSKU([

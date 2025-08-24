@@ -9,11 +9,15 @@ function trackingStockKeepingUnit(stocks) {
 
       stats.totalSkus += 1;
 
-      if (!stocks[i].id || stocks[i].id == "" || !stocks[i].name || stocks[i].name == "" || !sku || sku == "" || !variant || variant == [] || !variant.color || variant.color == "" || !variant.size || variant.size == "" || !variant.price || variant.price == "") {
+      //check if product or variant has missing or invalid data
+
+      if (!stocks[i].id || stocks[i].id == "" || !stocks[i].name || stocks[i].name == "" || !sku || sku == "" || !variant || !Array.isArray(stocks[i].variants) || stocks[i].variants.length == 0 || !variant.color || typeof variant.color !== "string" || variant.color == "" || !variant.size || typeof variant.size !== "string" || variant.size == "" || !variant.price || variant.price <= 0 || typeof variant.price !== "number" || variant.price == "" || typeof variant.stock !== "number" || variant.stock < 0) {
         stats.invalid += 1;
         continue;
-
       }
+
+      // If SKU is seen for the first time, create a new entry
+
       if (!trackedStocks[sku]) {
         trackedStocks[sku] = {
           sku: sku,
@@ -27,15 +31,19 @@ function trackingStockKeepingUnit(stocks) {
         };
       }
 
+      // If SKU already exists, update stock and add new productId if not already present
+
       else {
         let alreadyExists = false;
         for (let k = 0; k < trackedStocks[sku].productId.length; k++) {
-          if (trackedStocks[sku].productId == stocks[i].id) {
+          if (trackedStocks[sku].productId[k] == stocks[i].id) {
             alreadyExists = true;
             break;
           }
 
         }
+
+        // Add productId if it’s not already in the list
         if (!alreadyExists) {
           trackedStocks[sku].productId[trackedStocks[sku].productId.length] = stocks[i].id;
         }

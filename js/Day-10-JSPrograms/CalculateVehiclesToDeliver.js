@@ -3,7 +3,7 @@ function calculateMinimumVehiclesToDeliver(vehicles, parcels) {
     console.error("Invalid input,please give the proper input");
     return false;
   }
-  
+
   let temp;
   let parcelWeight;
   let vehiclesToDeliver;

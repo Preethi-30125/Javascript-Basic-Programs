@@ -1,5 +1,5 @@
 function getTotalAmount(storeInventory, userList) {
-    
+
     let totalBill = 0;
     let storeItem;
     let userItem;
@@ -20,7 +20,7 @@ function getTotalAmount(storeInventory, userList) {
             return false;
         }
         // Check if requested quantity is valid
-        if (userItem.quantity <= 0 ) {
+        if (userItem.quantity <= 0) {
             console.error("Invalid quantity " + userItem.quantity + " for " + userItem.item);
             continue;
         }
