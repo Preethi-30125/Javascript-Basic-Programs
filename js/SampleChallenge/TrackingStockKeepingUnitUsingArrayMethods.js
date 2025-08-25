@@ -1,11 +1,14 @@
 function trackingStockKeepingUnit(stocks) {
   let trackedStocks = {};
   let stats = { totalSkus: 0, deduped: 0, invalid: 0 };
+  let variant;
+  let sku;
+  let alreadyExists;
 
   for (let i = 0; i < stocks.length; i++) {
     for (let vi = 0; vi < stocks[i].variants.length; vi++) {
-      let variant = stocks[i].variants[vi];
-      let sku = variant.sku;
+      variant = stocks[i].variants[vi];
+      sku = variant.sku;
 
       stats.totalSkus += 1;
 
@@ -34,7 +37,7 @@ function trackingStockKeepingUnit(stocks) {
       // If SKU already exists, update stock and add new productId if not already present
 
       else {
-        let alreadyExists = false;
+        alreadyExists = false;
         for (let k = 0; k < trackedStocks[sku].productId.length; k++) {
           if (trackedStocks[sku].productId[k] == stocks[i].id) {
             alreadyExists = true;

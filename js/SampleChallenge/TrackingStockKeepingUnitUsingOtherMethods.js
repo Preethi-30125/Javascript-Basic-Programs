@@ -1,5 +1,9 @@
 function trackingSKU(stocks) {
     let stats = { totalSkus: 0, deduped: 0, invalid: 0 };
+    let validVariants;
+    let isValid;
+    let trackedStocks;
+    let alreadyExists;
     const allVariants = stocks.map(function (product) {
         return product.variants.map(function (variant) {
             return {
@@ -22,8 +26,8 @@ function trackingSKU(stocks) {
     }, []);
 
     //check if product or variant has missing or invalid data
-    const validVariants = allVariants.filter(function (valid) {
-        const isValid = valid.productId && typeof valid.productId === "string" &&
+    validVariants = allVariants.filter(function (valid) {
+        isValid = valid.productId && typeof valid.productId === "string" &&
             valid.productName && typeof valid.productName === "string" &&
             valid.sku && typeof valid.sku === "string" &&
             valid.color && typeof valid.color === "string" &&
@@ -38,7 +42,7 @@ function trackingSKU(stocks) {
 
     stats.totalSkus = allVariants.length;
 
-    const trackedStocks = validVariants.reduce(function (combinedVariants, valid) {
+    trackedStocks = validVariants.reduce(function (combinedVariants, valid) {
         if (!combinedVariants[valid.sku]) {
             // If SKU is seen for the first time, create a new entry
             combinedVariants[valid.sku] = {
@@ -51,7 +55,7 @@ function trackingSKU(stocks) {
             };
         } else {
             // If SKU already exists, check if this productId is already included
-            let alreadyExists = false;
+            alreadyExists = false;
             for (let i = 0; i < combinedVariants[valid.sku].productId.length; i++) {
                 if (combinedVariants[valid.sku].productId[i] === valid.productId) {
                     alreadyExists = true;
