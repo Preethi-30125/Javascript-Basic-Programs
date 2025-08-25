@@ -103,6 +103,12 @@ function findSpecificEmail(data, getEmail) {
 
 function findHighestFemaleIncomeWithCountry(data, gender) {
     let tempGender = "";
+    let femaleCountryIncome = {};
+    let highestFemaleIncome = 0;
+    let countryWithFemaleHighestIncome = "";
+    let country;
+    let income;
+    let genderData;
 
     // Remove spaces from search string(getEmail)
     for (let i = 0; i < gender.length; i++) {
@@ -112,13 +118,6 @@ function findHighestFemaleIncomeWithCountry(data, gender) {
         tempGender += gender[i];
     }
     gender = tempGender;
-
-    let femaleCountryIncome = {};
-    let highestFemaleIncome = 0;
-    let countryWithFemaleHighestIncome = "";
-    let country;
-    let income;
-    let genderData;
 
     for (let j = 0; j < data.length; j++) {
         country = data[j].country;
